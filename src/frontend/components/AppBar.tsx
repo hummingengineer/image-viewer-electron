@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import createStyles from '@material-ui/core/styles/createStyles';
 
@@ -49,6 +49,13 @@ export default function AppBar() {
     };
   }, []);
 
+  const handleMinimizeApp = useCallback(() => window.api.send('minimize-app'), []);
+  const handleMaximizeUnmaximizeApp = useCallback(
+    () => window.api.send('maximize-unmaximize-app'),
+    []
+  );
+  const handleCloseApp = useCallback(() => window.api.send('close-app'), []);
+
   return (
     <AppBarMaterial position="fixed" className={classes.root}>
       <Toolbar className={classes.toolbar}>
@@ -56,17 +63,13 @@ export default function AppBar() {
           Image Viewer
         </Typography>
         <div className={classes.sectionDesktop}>
-          <IconButton color="inherit" edge="end" onClick={() => window.api.send('minimize-app')}>
+          <IconButton color="inherit" edge="end" onClick={handleMinimizeApp}>
             <MinimizeIcon />
           </IconButton>
-          <IconButton
-            color="inherit"
-            edge="end"
-            onClick={() => window.api.send('maximize-unmaximize-app')}
-          >
+          <IconButton color="inherit" edge="end" onClick={handleMaximizeUnmaximizeApp}>
             {isFullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
           </IconButton>
-          <IconButton color="inherit" edge="end" onClick={() => window.api.send('close-app')}>
+          <IconButton color="inherit" edge="end" onClick={handleCloseApp}>
             <CloseIcon />
           </IconButton>
         </div>
