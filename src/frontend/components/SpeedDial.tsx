@@ -36,7 +36,10 @@ export default function SpeedDial() {
         direction="up"
         icon={<SpeedDialIcon />}
         open={isSpeedDialOpen}
-        onOpen={handleSpeedDialOpen}
+        onOpen={(e, r) => {
+          if (r === 'focus') return;
+          handleSpeedDialOpen();
+        }}
         onClose={handleSpeedDialClose}
       >
         {actions.map((action) => (
