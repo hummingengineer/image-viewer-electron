@@ -14,13 +14,10 @@ export default function Pagination() {
   }, []);
 
   useEffect(() => {
-    window.api.receive(
-      'total-page-count',
-      (event: Electron.IpcRendererEvent, totalPageCount: number) => {
-        window.api.send('page-changed', 1);
-        setTotalPageCount(totalPageCount);
-      }
-    );
+    window.api.receive('total-page-count', (event: Electron.IpcRendererEvent, value: number) => {
+      window.api.send('page-changed', 1);
+      setTotalPageCount(value);
+    });
 
     return function cleanup() {
       window.api.remove('total-page-count');
