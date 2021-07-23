@@ -24,7 +24,10 @@ export default function SpeedDial() {
 
   const [isSpeedDialOpen, setIsSpeedDialOpen] = useState(false);
 
-  const handleSpeedDialOpen = useCallback(() => setIsSpeedDialOpen(true), []);
+  const handleSpeedDialOpen = useCallback((e: React.SyntheticEvent<{}, Event>, r: string) => {
+    if (r === 'focus') return;
+    setIsSpeedDialOpen(true);
+  }, []);
   const handleSpeedDialClose = useCallback(() => setIsSpeedDialOpen(false), []);
   const handleSpeedDialAction = useCallback((channel) => window.api.send(channel), []);
 
@@ -36,10 +39,7 @@ export default function SpeedDial() {
         direction="up"
         icon={<SpeedDialIcon />}
         open={isSpeedDialOpen}
-        onOpen={(e, r) => {
-          if (r === 'focus') return;
-          handleSpeedDialOpen();
-        }}
+        onOpen={handleSpeedDialOpen}
         onClose={handleSpeedDialClose}
       >
         {actions.map((action) => (

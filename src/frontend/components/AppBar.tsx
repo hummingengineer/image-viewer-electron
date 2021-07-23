@@ -35,6 +35,13 @@ export default function AppBar() {
 
   const [isFullScreen, setIsFullScreen] = useState(false);
 
+  const handleMinimizeApp = useCallback(() => window.api.send('minimize-app'), []);
+  const handleMaximizeUnmaximizeApp = useCallback(
+    () => window.api.send('maximize-unmaximize-app'),
+    []
+  );
+  const handleCloseApp = useCallback(() => window.api.send('close-app'), []);
+
   useEffect(() => {
     window.api.receive('app-maximized', () => {
       setIsFullScreen(true);
@@ -48,13 +55,6 @@ export default function AppBar() {
       window.api.remove('app-unmaximized');
     };
   }, []);
-
-  const handleMinimizeApp = useCallback(() => window.api.send('minimize-app'), []);
-  const handleMaximizeUnmaximizeApp = useCallback(
-    () => window.api.send('maximize-unmaximize-app'),
-    []
-  );
-  const handleCloseApp = useCallback(() => window.api.send('close-app'), []);
 
   return (
     <AppBarMaterial position="fixed" className={classes.root}>

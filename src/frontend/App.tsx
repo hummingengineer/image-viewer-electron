@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 import AppBar from './components/AppBar';
+import Content from './components/Content';
 import SpeedDial from './components/SpeedDial';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -17,6 +18,7 @@ export default function App() {
     <>
       <AppBar />
       <div className={classes.offset} />
+      <Content />
       <SpeedDial />
     </>
   );
