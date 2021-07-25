@@ -25,7 +25,7 @@ const createWindow = (): void => {
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
       contextIsolation: true,
-      devTools: true,
+      devTools: false,
     },
   });
 
@@ -37,7 +37,7 @@ const createWindow = (): void => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Minimize app
   ipcMain.on('minimize-app', () => mainWindow.minimize());
