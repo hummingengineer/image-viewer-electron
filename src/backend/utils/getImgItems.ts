@@ -1,12 +1,12 @@
 import fs from 'fs';
 import path from 'path';
-import { imgItem } from '../../types';
+import { ImgItem } from '../../types';
 
 export default async function getImgItems(imgPaths: Array<string>, page: number) {
   const start = (page - 1) * 10;
   const end = page * 10 - 1;
 
-  const imgDatas: Array<imgItem> = [];
+  const imgDatas: Array<ImgItem> = [];
 
   for (let i = start; i <= end; ++i) {
     if (!imgPaths[i]) break;

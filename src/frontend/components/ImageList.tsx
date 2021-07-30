@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
-import { imgItem } from '../../types';
+import { ImgItem } from '../../types';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -40,7 +40,7 @@ const useStyles = makeStyles(() =>
 export default function ImageList() {
   const classes = useStyles();
 
-  const [imgItems, setImgItems] = useState<Array<imgItem>>([]);
+  const [imgItems, setImgItems] = useState<Array<ImgItem>>([]);
 
   const handleShowItemInFolder = useCallback(
     (path) => window.api.send('show-item-in-folder', path),
@@ -54,7 +54,7 @@ export default function ImageList() {
   useEffect(() => {
     window.api.receive(
       'image-items',
-      (event: Electron.IpcRendererEvent, imgItems: Array<imgItem>) => {
+      (event: Electron.IpcRendererEvent, imgItems: Array<ImgItem>) => {
         setImgItems(imgItems);
       }
     );
