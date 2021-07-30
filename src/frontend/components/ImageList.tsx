@@ -24,6 +24,7 @@ const useStyles = makeStyles(() =>
         transform: 'scale(1.02)',
         zIndex: 1,
         boxShadow: '5px 5px 15px rgba(0,0,0,0.4)',
+        cursor: 'pointer',
       },
     },
     titleBar: {
@@ -67,7 +68,13 @@ export default function ImageList() {
   return (
     <ImageListMaterial className={classes.imageList} gap={1} cols={3}>
       {imgItems.map((imgItem) => (
-        <ImageListItem className={classes.imageListItem} key={imgItem.path} rows={2} cols={1}>
+        <ImageListItem
+          className={classes.imageListItem}
+          key={imgItem.path}
+          rows={2}
+          cols={1}
+          onClick={() => handleOpenDialog(imgItem.base64)}
+        >
           <img src={imgItem.base64} />
           <ImageListItemBar
             className={classes.titleBar}
