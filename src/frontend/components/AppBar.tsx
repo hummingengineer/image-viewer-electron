@@ -35,12 +35,12 @@ export default function AppBar() {
 
   const [isFullScreen, setIsFullScreen] = useState(false);
 
-  const handleMinimizeApp = useCallback(() => window.api.send('minimize-app'), []);
-  const handleMaximizeUnmaximizeApp = useCallback(
+  const handleAppMinimize = useCallback(() => window.api.send('minimize-app'), []);
+  const handleAppMaximizeUnmaximize = useCallback(
     () => window.api.send('maximize-unmaximize-app'),
     []
   );
-  const handleCloseApp = useCallback(() => window.api.send('close-app'), []);
+  const handleAppClose = useCallback(() => window.api.send('close-app'), []);
 
   useEffect(() => {
     window.api.receive('app-maximized', () => {
@@ -63,13 +63,13 @@ export default function AppBar() {
           Image Viewer
         </Typography>
         <div className={classes.sectionDesktop}>
-          <IconButton color="inherit" edge="end" onClick={handleMinimizeApp}>
+          <IconButton color="inherit" edge="end" onClick={handleAppMinimize}>
             <MinimizeIcon />
           </IconButton>
-          <IconButton color="inherit" edge="end" onClick={handleMaximizeUnmaximizeApp}>
+          <IconButton color="inherit" edge="end" onClick={handleAppMaximizeUnmaximize}>
             {isFullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
           </IconButton>
-          <IconButton color="inherit" edge="end" onClick={handleCloseApp}>
+          <IconButton color="inherit" edge="end" onClick={handleAppClose}>
             <CloseIcon />
           </IconButton>
         </div>

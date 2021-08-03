@@ -47,7 +47,7 @@ export default function ImageList() {
     (path) => window.api.send('show-item-in-folder', path),
     []
   );
-  const handleOpenDialog = useCallback(
+  const handleDialogOpen = useCallback(
     (base64) => window.api.send('show-image-dialog', base64),
     []
   );
@@ -73,7 +73,7 @@ export default function ImageList() {
           key={imgItem.path}
           rows={2}
           cols={1}
-          onClick={() => handleOpenDialog(imgItem.base64)}
+          onClick={() => handleDialogOpen(imgItem.base64)}
         >
           <img src={imgItem.base64} />
           <ImageListItemBar
@@ -89,7 +89,7 @@ export default function ImageList() {
                 </IconButton>
                 <IconButton
                   className={classes.icon}
-                  onClick={() => handleOpenDialog(imgItem.base64)}
+                  onClick={() => handleDialogOpen(imgItem.base64)}
                 >
                   <OpenInNewIcon />
                 </IconButton>

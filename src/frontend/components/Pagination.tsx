@@ -7,7 +7,7 @@ export default function Pagination() {
   const [totalPageCount, setTotalPageCount] = useState(0);
   const [page, setPage] = useState(1);
 
-  const handlePage = useCallback((event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = useCallback((event: React.ChangeEvent<unknown>, value: number) => {
     window.api.send('page-changed', value);
     setPage(value);
     window.scrollTo(0, 0);
@@ -33,7 +33,7 @@ export default function Pagination() {
             page={page}
             size="large"
             color="primary"
-            onChange={handlePage}
+            onChange={handlePageChange}
           />
         </Grid>
       )}
