@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import DialogMaterial from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
 
 export default function Dialog() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -21,10 +20,13 @@ export default function Dialog() {
   }, []);
 
   return (
-    <DialogMaterial open={isDialogOpen} onClose={handleDialogClose}>
-      <DialogContent>
-        <img src={img} />
-      </DialogContent>
+    <DialogMaterial open={isDialogOpen} onClose={handleDialogClose} maxWidth="lg">
+      {/* DialogMaterial uses 32px as margin */}
+      <img
+        src={img}
+        style={{ maxWidth: '100%', maxHeight: 'calc(100vh - 64px)' }}
+        onClick={handleDialogClose}
+      />
     </DialogMaterial>
   );
 }
