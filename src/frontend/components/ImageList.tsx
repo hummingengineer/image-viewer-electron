@@ -5,12 +5,8 @@ import createStyles from '@material-ui/core/styles/createStyles';
 import ImageListMaterial from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import ImageListItemBar from '@material-ui/core/ImageListItemBar';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import FolderOpenIcon from '@material-ui/icons/FolderOpen';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+
+import Menu from './Menu';
 
 import { ImgItem } from '../../types';
 
@@ -45,22 +41,11 @@ export default function ImageList() {
   const classes = useStyles();
 
   const [imgItems, setImgItems] = useState<Array<ImgItem>>([]);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleDialogOpen = useCallback(
     (base64) => window.api.send('show-image-dialog', base64),
     []
   );
-  const handleMenuOpen = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.stopPropagation();
-    setAnchorEl(event.currentTarget);
-  }, []);
-  const handleMenuClose = useCallback(() => setAnchorEl(null), []);
-  const handleShowItemInFolder = useCallback(
-    (path) => window.api.send('show-item-in-folder', path),
-    []
-  );
-  const handleOpenInNew = useCallback((path) => window.api.send('open-in-new', path), []);
 
   useEffect(() => {
     window.api.receive(
@@ -89,39 +74,7 @@ export default function ImageList() {
           <ImageListItemBar
             className={classes.titleBar}
             position="top"
-            actionIcon={
-              <>
-                <IconButton className={classes.icon} onClick={handleMenuOpen}>
-                  <MoreVertIcon />
-                </IconButton>
-                <Menu
-                  id="more-menu"
-                  anchorEl={anchorEl}
-                  keepMounted
-                  open={Boolean(anchorEl)}
-                  onClose={handleMenuClose}
-                >
-                  <MenuItem
-                    onClick={(event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-                      event.stopPropagation();
-                      handleMenuClose();
-                      handleShowItemInFolder(imgItem.path);
-                    }}
-                  >
-                    <FolderOpenIcon />
-                  </MenuItem>
-                  <MenuItem
-                    onClick={(event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-                      event.stopPropagation();
-                      handleMenuClose();
-                      handleOpenInNew(imgItem.path);
-                    }}
-                  >
-                    <OpenInNewIcon />
-                  </MenuItem>
-                </Menu>
-              </>
-            }
+            actionIcon={<Menu key={imgItem.path} path={imgItem.path} />}
           />
         </ImageListItem>
       ))}
