@@ -35,7 +35,7 @@ function Menu({ path }: { path: string }) {
 
   return (
     <>
-      <IconButton className={classes.icon} onClick={handleMenuOpen}>
+      <IconButton className={classes.icon} onMouseEnter={handleMenuOpen}>
         <MoreVertIcon />
       </IconButton>
       <MenuMaterial
@@ -44,6 +44,9 @@ function Menu({ path }: { path: string }) {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
+        MenuListProps={{
+          onMouseLeave: handleMenuClose,
+        }}
       >
         <MenuItem
           onClick={(event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
