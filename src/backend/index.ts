@@ -81,6 +81,11 @@ const createWindow = (): void => {
     shell.showItemInFolder(path);
   });
 
+  // Open the item with the default photo viewer of OS
+  ipcMain.on('open-in-new', async (event: Electron.IpcMainEvent, path: string) => {
+    await shell.openPath(path);
+  });
+
   // Show the image dialog
   ipcMain.on('show-image-dialog', (event: Electron.IpcMainEvent, base64: string) => {
     event.reply('dialog-image', base64);
