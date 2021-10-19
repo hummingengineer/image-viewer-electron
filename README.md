@@ -1,5 +1,7 @@
 # Image Viewer
 
+![screenshot](https://github.com/hummingengineer/image-viewer-electron/blob/master/screenshot.PNG)
+
 This desktop application shows all images in the selected folder.
 
 ## Built With
